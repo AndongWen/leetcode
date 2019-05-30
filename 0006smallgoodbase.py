@@ -32,7 +32,7 @@ class Solution(object):
 #       for i in range(m, 1, -1):
 		while m >= 2:
             left = 2
-            right = int(pow(n, 1/(m-1))+1)
+            right = int(pow(n, 1/(m-1))+1) # 由于采用二分法查找，下面的条件中不包含等号，左右right必须大于可能的k值
             while left < right:
                 sum = 0
                 mid = left + (right-left)//2
@@ -45,4 +45,23 @@ class Solution(object):
                 else:
                     right = mid
 			m -= 1
+        return str(n-1)
+
+    def smallestGoodBase3(self, n: str) -> str:
+        n = int(n)
+        m = int(math.log2(n+1))
+        cat = set()
+        p = 2
+        cat.add(2)
+        for i in range(m, 2, -1):
+            p = int(pow(n, 1/(i-1))) # p为实实在在的k值，不需要加1
+            cat.add(p)
+        for i in cat:
+            if n%i == 1:
+                h = n*i-n+1
+                t = i
+                while t<h:
+                    t = t*i
+                    if t ==h:
+                        return str(i)
         return str(n-1)
