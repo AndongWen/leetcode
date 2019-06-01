@@ -56,3 +56,32 @@ class Solution(object):
 			res.append(ans)
 		return res
 			
+	def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+		'''两个stack,各自保存一层数据'''
+        res = []
+        if not root:
+            return res
+        stack1 = [root]
+        stack2 = []
+        while stack1 or stack2:
+            ans = []
+            if stack1:
+                len1 = len(stack1)
+                for i in range(len1):
+                    node = stack1.pop()
+                    ans.append(node.val)
+                    if node.left:
+                        stack2.append(node.left)
+                    if node.right:
+                        stack2.append(node.right)
+            elif stack2:
+                len2 = len(stack2)
+                for i in range(len2):
+                    node = stack2.pop()
+                    ans.append(node.val)
+                    if node.right:
+                        stack1.append(node.right)
+                    if node.left:
+                        stack1.append(node.left)
+            res.append(ans)   
+        return res
