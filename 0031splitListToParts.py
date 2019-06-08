@@ -32,7 +32,9 @@ class Solution:
             if mod > 0:
                 a += 1
                 mod -= 1
-            for i in range(a-1):
+            for i in range(a-1): 
+			# 不是a，因为一开始的cur就指向了第一个节点,range里面取1时
+            # cur向后移动一个，实际分组为两个一组
                 cur = cur.next 
             temp = cur.next
             cur.next = None
