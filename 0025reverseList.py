@@ -31,10 +31,11 @@ class Solution:
     def reverseList3(self, head: ListNode) -> ListNode:
         '''递归'''        
         if head is None or head.next is None: 
-			'''head :防止链表为空
-			   head.next is None:head为链表中最后一个节点'''
+			'''head :防止链表为空 仅仅用于第一次判断
+			   head.next is None:head为链表中最后一个节点
+					反转过程中，即返回第一个节点的引用'''
             return head
-        p = self.reverseList3(head.next) # 仅用来保存最后一个节点的引用，即返回指针的head
+        p = self.reverseList3(head.next) # 仅用来保存反转最后一个节点的引用，即返回指针的head
         head.next.next = head
         head.next = None
         return p 
