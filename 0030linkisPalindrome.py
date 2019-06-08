@@ -46,3 +46,16 @@ class Solution:
             pre = cur
             cur = next
         return pre
+
+    def isPalindrome2(self, head: ListNode) -> bool:
+		'''空间复杂度不'''
+        if head == None or head.next == None:
+            return True
+        target = []
+        while head:
+            target.append(head.val)
+            head=head.next
+        p = (len(target)-1)//2+1
+        q = (len(target))//2
+        
+        return target[0:p]==target[q:len(target)][::-1]
