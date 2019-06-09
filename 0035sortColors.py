@@ -48,3 +48,14 @@ class Solution(object):
                 nums.pop(i)
                 nums.insert(0,0)
                 i += 1
+
+class Solution(object):
+	def sortColors(self, nums):
+	'''利用collections中的Counter神器,不仅仅可以解决三色问题'''
+		from collections import Counter
+		c = Counter(nums)
+		p = 0
+		for i in range(3):
+			for j in range(c[i]):
+				nums[p] = i
+				p += 1
