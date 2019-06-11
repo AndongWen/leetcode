@@ -15,7 +15,7 @@ class Solution(object):
 以及最大利润，但我们可以直接继续增加加数组的连续数字之间的差值，
 如果第二个数字大于第一个数字，我们获得的总和将是最大利润。
 这种方法将简化解决方案(建议画图）'''
-		return sum(a-b for a, b in zip(prices, prices[1:]) if a>b)
+		return sum(a-b for a, b in zip(prices[1:], prices) if a>b)
 		# zip :从参数中的多个迭代器取元素组成一个新的迭代器
 		#      返回一个zip对象，内部元素为元祖
 		#      元素数目取决于迭代器中少的元素个数
