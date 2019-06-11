@@ -29,10 +29,20 @@ class Solution:
 
 class Solution:
     def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+		'''思路1'''
+		tmp = [0] + flowerbed + [0]
+		for i in range(1, len(tmp)-1):
+			if tmp[i-1] ==0 and tmp[i] ==0 and tmp[i+1] ==0:
+				n -= 1
+				tmp[i] = 1
+		return True if n<=0 else False	
+
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
 		'''思路2'''
         count = 0
-        flowerbed.insert(0, 0)
-        flowerbed.append(0) # 相当于第二次遍历
+        flowerbed.insert(0, 0) # O(N)
+        flowerbed.append(0) 
         i = 0
         while i < len(flowerbed):
             if flowerbed[i] == 1:
