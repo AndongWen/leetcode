@@ -32,3 +32,25 @@ class Solution(object):
 			res += 1
 		res += self.haspathSumFromRoot(root.left, sum-root.val)+self.haspathSumFromRoot(root.right, sum-root.val)
 		return res	
+
+
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+		'''思路2'''
+        d = coll.defaultdict(int) # 一般性字典，当访问字典中不存在的键时会出错，此字典设置了
+								  # 默认值，括号里的为键的类型
+        d[0] = 1
+        self.res = 0 # 用于保存路径总数
+        
+        def help(node, cursum):
+            if not node:
+                return
+            cursum += node.val
+            self.res += d[cursum-sum]
+            d[cursum] += 1
+            help(node.left, cursum)
+            help(node.right, cursum)
+            d[cursum] -= 1 # 回溯，保证字典中记录的是当前节点到根节点中所有sum的频率
+        
+        help(root, 0)
+        return self.res
