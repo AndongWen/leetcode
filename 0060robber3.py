@@ -26,7 +26,7 @@ class Solution(object):
 		用一个长度为2的列表来存储每个节点的情况'''	
 		def helper(root):
 			if not root:
-				return 0
+				return [0, 0]
 			left = helper(root.left)
 			right = helper(root.right)
 			rob = root.val + left[1] + right[1] # 第二元素为不取的值
