@@ -21,3 +21,26 @@ class Solution(object):
 			if self.flag:
 				return self.min
 		return -1
+
+	def findSecondMinimumValue2(self, root):
+		'''思路：递归：
+				一个节点若有孩子，则节点的值一定最小，所以只要返回孩子的最小值即可，但要注意
+				孩子的值可能与父节点一样大'''
+		if not root:
+			return -1
+		if not root.left and not root.right:
+			return -1
+		leftval = root.left.val
+		rightval = root.right.val
+		if leftval == root.val:
+			leftval = self.findSecondMinimumValue2(root.left)
+		if rightval == root.val:
+			rightval = self.findSecondMinimumValue2(root.right)
+		if rightval != -1 and leftval != -1:
+			return min(rightval, leftval)
+		if rightval == -1 and leftval == -1:
+			return -1
+		if leftval == -1:
+			return rightval
+		return leftval
+		
