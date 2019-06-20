@@ -45,3 +45,17 @@ class Solution:
             ans = next(it)
         return ans
         
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+		'''递归，还是利用二叉搜索树的特点'''
+        def count(root: TreeNode) -> int:
+            # 用于递归统计一棵树得节点数 主要统计左子树的节点数
+            if not root:
+                return 0
+            return 1 + count(root.left) + count(root.right)
+        
+        leftcnt = count(root.left)
+        if leftcnt == k-1:
+            return root.val
+        if leftcnt > k-1:
+            return self.kthSmallest(root.left, k)
+        return self.kthSmallest(root.right, k-leftcnt-1)
