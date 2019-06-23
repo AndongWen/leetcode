@@ -24,3 +24,29 @@ class Solution:
             nums.remove(num[j])
             b = nums.index(num[j]) + 1
         return [a,b] 
+
+
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        sorted_id = sorted(range(len(nums)), key = lambda k: nums[k]) # 根据元素得大小对元素得索引排序
+        head = 0
+        tail = len(nums)-1
+        while head != tail:
+            if nums[sorted_id[head]] + nums[sorted_id[tail]] == target:
+                break
+            elif nums[sorted_id[head]] + nums[sorted_id[tail]] > target:
+                tail -= 1
+            else:
+                head += 1
+        if head == tail:
+            return []
+        return [sorted_id[head], sorted_id[tail]]
+
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+		#　使用哈希表　　python中字典就是用哈希表，查询的复杂度为O(1)
+        hashmap = {}
+        for index, num in enumerate(nums):
+            if target - num in hashmap:
+                return [hashmap[target-num], index]
+            else:
+                hashmap[num] = index
+        return []        
