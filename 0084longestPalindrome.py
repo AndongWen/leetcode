@@ -42,3 +42,30 @@ class Solution:
             l -= 1
             r += 1
         return r-l-1 # r与l都比符合条件得大1和小1 完美包括两种情况
+
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+		'''动态规划：类似中心扩展的逆思考
+		   dp 为一个二维数组，dp[j][i]表示s[j,i]能否形成回文串,如果dp[j][i]可以形成回
+		   回文串，那么dp[j+1][i-1]也一定可以形成回文串；反过来，如果dp[j+1][i-1]可以
+　　　　　 形成回文串，只需要对比s[j]与s[i]既可以判断s[j,i]是否为回文串.
+		　 注意：
+		        1.s[j+1,i-1]要存在，即i-1>j+1 ==> i-j>2
+			    2.若不满足上述条件，则说明两者重合为一个字符，只要验证是s[i]与s[j]
+				3.要形成字符串，必须要有i>j,所有二维数组中只有下三角形有用	
+		　 动态转移方程为:dp[j][i] = (s[i] == s[j] and (i-j<=2 or dp[j+1][i-1]))'''
+		n = len(s)
+		if n <= 1:
+			return s
+		length = 1 # 至少长度为１
+		res = s[0]
+		
+		dp = [[False for _ in range(n)] for _ in range(n)] # 初始化
+		for i in range(n):
+			for j in range(i):
+				if s[i] = s[j] and (i-j<=2 or dp[j+1][i-1]):
+					dp[j][i] = True
+					if i-j+1 > length:
+						length = i-j+1
+						res = s[j: i+1]
+		return res
