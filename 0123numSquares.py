@@ -36,3 +36,24 @@ class Solution:
         for j in range(1, n+1):
             if is_divide_by(n, j):
                 return j
+
+# 和上述解法一致，使用贪心BFS
+class Solution:
+    def numSquares(self, n: int) -> int:
+        queue = [n]
+        level =  0
+        numsquares = [i*i for i in range(1, int(n**0.5)+1)]
+
+        while queue:
+            level += 1
+            next_queue = set() # 避免重复的元素，节省空间和时间
+            for remain in queue:
+                for numsquare in numsquares:
+                    if remain == numsquare:
+                        return level
+                    elif remain > numsquare:
+                        next_queue.add(remain - numsquare)
+                    else:
+                        break
+
+            queue = next_queue
