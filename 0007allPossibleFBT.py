@@ -15,14 +15,14 @@ class TreeNode(object):
 
 
 class Solution(object):
-	dres = {0:[], 1:[TreeNode(0)]} # 用于存储一定节点数目的满二叉树情况，避免重复计算
+	dres = {0 : [], 1 : [TreeNode(0)]} # 用于存储一定节点数目的满二叉树情况，避免重复计算
 
 	def allPossibleTree1(self, N):
 		'''不足之处：左右节点的数目互换的时候，需要重新计算，即当
 			有些节点数目构成二叉树的时候，对应的情况会反复计算'''
 		if N == 1:
 			return [TreeNode(0)] # 返回对应的根节点
-		elif N%2 == 0:
+		elif N % 2 == 0:
 			return []
 		res = [] # 用于存储每个满二叉树的根节点，方便后续的遍历
 		for i in range(1, N, 2): # 偶数不可能形成满二叉树
@@ -36,7 +36,7 @@ class Solution(object):
 
 	def allPossibleTree2(self, N):
 		if N not in Solution.dres:
-			if N%2 == 0:
+			if N % 2 == 0:
 				return []
 			res = [] # 用于存储每个满二叉树的根节点，方便后续的遍历
 			for i in range(1, N, 2): # 偶数不可能形成满二叉树
